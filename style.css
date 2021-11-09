@@ -1,0 +1,12 @@
+#login-area{
+    padding: 100px;
+}
+#input-area{
+    margin-top: 50px;
+    box-shadow: 10px 10px 20px gray;
+    padding: 30px;
+    border-radius: 10px;
+}
+#deposit-area{
+    display: none;
+}
