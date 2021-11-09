@@ -16,11 +16,13 @@
         <h2 class="text-center">Welcome To Islamic Bank</h2>
         <div class="submit-area">
             <h5>Login</h5>
-            <input type="email" class="form-control" required>
+            <input id="user-email" type="email" class="form-control" placeholder="Email" required>
             <br>
-            <input type="password" class="form-control" name="" id="" required>
+            <input id="user-pass" type="password" class="form-control" placeholder="Password" required>
             <br>
             <button id="login-button" class="btn btn-success">Enter</button>
+            <br><br>
+            <div id="error-message"></div>
         </div>
     </div>
 
@@ -74,11 +76,24 @@
         // Login Area :
         const loginBtn = document.getElementById("login-button");
         loginBtn.addEventListener('click', function(){
-            const loginArea = document.getElementById("login-area");
-            loginArea.style.display = "none";
-
-            const depositArea = document.getElementById("transaction-area");
-            depositArea.style.display = "block";
+            var email = 'admin@gmail.com';
+            var pass = 'admin';
+            var userEmail = document.getElementById("user-email").value;
+            var userPass = document.getElementById("user-pass").value;
+            if (userEmail == email && userPass == pass){
+                const loginArea = document.getElementById("login-area");
+                loginArea.style.display = "none";
+                
+                const depositArea = document.getElementById("transaction-area");
+                depositArea.style.display = "block";
+            }
+            else{
+                const errorMessage = document.getElementById("error-message");
+                const element = document.createElement("h6");
+                element.innerText = "Sorry! You have entered wrong Email and Password.";
+                element.style.color = "red";
+                errorMessage.appendChild(element);
+            }
         })
 
 
