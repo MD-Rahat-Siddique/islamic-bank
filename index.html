@@ -14,7 +14,7 @@
     <!-- Login Area  -->
     <div id="login-area">
         <h2 class="text-center">Welcome To Islamic Bank</h2>
-        <div id="input-area">
+        <div class="submit-area">
             <h5>Login</h5>
             <input type="email" class="form-control" required>
             <br>
@@ -26,8 +26,45 @@
 
 
     <!-- Deposit Area -->
-    <div id="deposit-area">
-        <h2>Here is deposit area</h2>
+    <div id="transaction-area">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit status">
+                    <h5>Deposit</h5>
+                    <h3>$ <span id="current-deposit">00</span></h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                    <h3>$ <span id="current-withdraw">00</span></h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                    <h3>$ <span id="current-balance">1240</span></h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Deposit</h4>
+                    <input id="deposit-amount" type="text" class="form-control" placeholder="$ amount you want to deposit">
+                    <br>
+                    <button id="depositButton" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Withdraw</h4>
+                    <input id="withdraw-amount" type="text" class="form-control" placeholder="$ amount you want to withdraw">
+                    <br>
+                    <button id="withdrawButton" class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -40,13 +77,46 @@
             const loginArea = document.getElementById("login-area");
             loginArea.style.display = "none";
 
-            const depositArea = document.getElementById("deposit-area");
+            const depositArea = document.getElementById("transaction-area");
             depositArea.style.display = "block";
         })
 
 
-        // Deposit Area :
+        // Deposit Event Handler Area :
+        const depositBtn = document.getElementById('depositButton');
+        depositBtn.addEventListener('click', function(){
+            const depositAmount = document.getElementById('deposit-amount').value;
+            const depositNumber = parseFloat(depositAmount);
+
+            updateSpanText('current-deposit', depositNumber);
+            updateSpanText('current-balance', depositNumber);
+
+            document.getElementById('deposit-amount').value = "";
+        });
+
+        // Withdraw Event Handler Area :
+        const withdrawBtn = document.getElementById('withdrawButton');
+        withdrawBtn.addEventListener('click', function(){
+            const withdrawAmount = document.getElementById('withdraw-amount').value;
+            const withdrawNumber = parseFloat(withdrawAmount);
+
+            updateSpanText('current-withdraw', withdrawNumber);
+            updateSpanText('current-balance', -1 * withdrawNumber);
+
+
+            document.getElementById('withdraw-amount').value = "";
+        })
+
+        function updateSpanText(id,depositNumber){
+            const currentBalance = document.getElementById(id).innerText;
+            const currentBalanceNumber = parseFloat(currentBalance);
+            const totalBalance = depositNumber + currentBalanceNumber;
+
+            document.getElementById(id).innerText = totalBalance;
+        }
+
         
+
     </script>
 </body>
 </html>
